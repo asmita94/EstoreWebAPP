@@ -1,0 +1,49 @@
+{% extends 'base.html '%}.
+{% load static %}
+{% block 'main' %}
+
+<button id="rzp-button1" class="btn btn-success">Proceed to pay</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_E9w9Tvgdt4IVfn", // Enter the Key ID generated from the Dashboard
+    "amount": "{{data.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Estore Pvt Ltd",
+    "description": "Test Transaction",
+    "image": "data:image/png;base64,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",
+    "order_id": "{{data.oid}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+{% endblock 'main' %}
